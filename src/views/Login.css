@@ -1,0 +1,63 @@
+/************sign in *****************/
+
+.sign-in {
+  margin: 0 auto;
+  width: 40%;
+}
+
+.sign-in-heading {
+  text-align: center;
+}
+
+.sign-in-button {
+  margin-bottom: 10px;
+  border: 1px solid #555;
+  width: 100%;
+  height: 48px;
+  font-family: inherit;
+  font-size: 1.125rem;
+  line-height: 48px;
+  color: #999;
+  background: transparent;
+}
+
+.sign-in-button:hover {
+  border: 2px solid #afafaf;
+}
+/********* Responsive sign-in ****************/
+
+@media screen and (max-width: 320px) {
+  .container {
+    width: 90%;
+  }
+}
+
+@media screen and (max-width: 630px) {
+  .sign-in {
+    width: 90%;
+  }
+  .icon-git {
+    font-size: 18px;
+  }
+  .container {
+    width: 80%;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .container {
+    width: 70%;
+  }
+  .sign-in {
+    width: 50%;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .container {
+    width: 60%;
+  }
+  .sign-in {
+    width: 40%;
+  }
+}

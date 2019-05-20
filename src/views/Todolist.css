@@ -1,0 +1,89 @@
+/*Smart phone nhỏ*/
+
+@media screen and (max-width: 320px) {
+  /* .header-action {
+        margin-top: 0;
+        margin-right: 200px;
+    } */
+  .sign-out {
+    margin-top: 7px;
+    margin-left: 5px;
+  }
+  .task-form {
+    font-size: 20px;
+  }
+  .sign-out {
+    margin-right: 5px;
+    padding-right: 5px;
+  }
+  .sign-out,
+  .h4 {
+    font-size: 12px;
+  }
+  .container {
+    width: 99%;
+  }
+}
+
+/*Iphone(480 x 640)*/
+
+@media screen and (min-width: 320px) {
+  .header-action,
+  .header-title {
+    display: flex;
+    /* margin-top: 0;
+        margin-right: 120px; */
+  }
+  .header-action {
+    justify-content: flex-end;
+  }
+  .container {
+    width: 80%;
+  }
+  .sign-out {
+    margin-top: 7px;
+  }
+}
+
+/*Tablet nhỏ(480 x 640)*/
+
+@media screen and (min-width: 480px) {
+  /* .header-action {
+        margin-top: 0;
+        margin-right: 190px;
+    } */
+  .header-action,
+  .header-title {
+    display: flex;
+    /* margin-top: 0;
+        margin-right: 120px; */
+  }
+  .header-action {
+    justify-content: flex-end;
+  }
+}
+
+/*Ipad dọc(768 x 1024)*/
+
+@media screen and (min-width: 768px) {
+  .header-action {
+    margin-top: -45px;
+  }
+  .container {
+    width: 70%;
+  }
+}
+
+/*Ipad ngang(1024 x 768)*/
+
+@media screen and (min-width: 1024px) {
+  .container {
+    width: 80%;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .container {
+    width: 40%;
+  }
+}
