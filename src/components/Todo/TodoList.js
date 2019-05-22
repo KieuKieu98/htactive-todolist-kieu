@@ -39,6 +39,7 @@ export default props => (
           editTodo={props.editTodo}
           editTodoList={props.editTodoList}
           closeTodo={props.closeTodo}
+          isLoading={props.isLoading}
         />
       ))}
     </div>

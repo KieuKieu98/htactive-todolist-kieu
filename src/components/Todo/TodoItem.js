@@ -1,11 +1,11 @@
 import React from "react";
-
 export default class TodoItem extends React.Component {
   state = {
-    value: this.props.text
+    value: ""
   };
 
-  onChange = event => this.setState({ value: event.target.value });
+  onChange = event =>
+    this.setState({ [event.target.name]: event.target.value });
 
   onSubmit = event => {
     event.preventDefault();
@@ -25,7 +25,10 @@ export default class TodoItem extends React.Component {
       isEdited,
       closeTodo
     } = this.props;
-
+    console.log(this.props.isLoading);
+    if (this.props.isLoading === true) {
+      return document.body.classList.add("busy-cursor");
+    }
     if (isEdited === true) {
       return (
         <div className="task-item">
@@ -33,9 +36,10 @@ export default class TodoItem extends React.Component {
             <div className="cell title">
               <form onSubmit={this.onSubmit}>
                 <input
+                  name="value"
                   type="text"
                   className="task-title"
-                  value={this.state.value}
+                  defaultValue={this.props.text}
                   onChange={this.onChange}
                 />
               </form>
@@ -55,7 +59,7 @@ export default class TodoItem extends React.Component {
     } else {
       return (
         <div className="task-item">
-          <div className="cell-lelf" onClick={() => markTodoDone(id)}>
+          <div className="cell-lelf" onClick={() => markTodoDone(id, done)}>
             <div className="cell">
               <button className="btn task-button" type="button">
                 <i
@@ -89,7 +93,9 @@ export default class TodoItem extends React.Component {
             <button
               className="btn task-button btn-delete"
               type="button"
-              onClick={() => removeTodo(id)}
+              onClick={e =>
+                window.confirm("Are you sure you want to delete this item?") &&
+                removeTodo(id)}
             >
               <i className="fas fa-trash icon" />
             </button>

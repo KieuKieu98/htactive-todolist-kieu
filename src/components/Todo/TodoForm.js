@@ -5,7 +5,8 @@ export default class TodoForm extends React.Component {
     value: ""
   };
 
-  onChange = event => this.setState({ value: event.target.value });
+  onChange = event =>
+    this.setState({ [event.target.name]: event.target.value });
 
   onSubmit = event => {
     event.preventDefault();
@@ -19,6 +20,7 @@ export default class TodoForm extends React.Component {
       <div className="input">
         <form onSubmit={this.onSubmit}>
           <input
+            name="value"
             type="text"
             className="task-form"
             placeholder="What needs to be done?"
