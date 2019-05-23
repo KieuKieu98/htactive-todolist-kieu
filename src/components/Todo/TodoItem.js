@@ -25,10 +25,7 @@ export default class TodoItem extends React.Component {
       isEdited,
       closeTodo
     } = this.props;
-    console.log(this.props.isLoading);
-    if (this.props.isLoading === true) {
-      return document.body.classList.add("busy-cursor");
-    }
+
     if (isEdited === true) {
       return (
         <div className="task-item">
@@ -63,7 +60,11 @@ export default class TodoItem extends React.Component {
             <div className="cell">
               <button className="btn task-button" type="button">
                 <i
-                  className="fas fa-check icon"
+                  className={
+                    this.props.loadIcon
+                      ? "fas fa-spinner icon"
+                      : "fas fa-check icon "
+                  }
                   style={{
                     color: done ? "green" : ""
                   }}

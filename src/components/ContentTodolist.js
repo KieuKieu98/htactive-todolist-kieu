@@ -1,46 +1,26 @@
 import React from "react";
 import TodoForm from "./Todo/TodoForm";
 import TodoList from "./Todo/TodoList";
-import shortid from "short-id";
+import Loader from "./Loader";
+// import shortid from "short-id";
 import axios from "axios";
 const API = "https://5ce4abbbc1ee360014725c91.mockapi.io/api/todos";
 export default class ContentTodolist extends React.Component {
   state = {
     todos: [],
-    // todos: [
-    //   {
-    //     id: shortid.generate(),
-    //     text: "kieu",
-    //     done: false,
-    //     isEdited: false
-    //   },
-    //   {
-    //     id: shortid.generate(),
-    //     text: "kieu",
-    //     done: false,
-    //     isEdited: false
-    //   }
-    // ],
-    loading: true,
+    isLoading: false,
+    loadIcon: false,
     todoToShow: "all" // 'active', 'completed'
   };
 
   async componentDidMount() {
+    this.setState({ isLoading: true });
     const res = await axios.get(API);
-    const data = await res.data;
-    this.setState({ todos: data });
-    //  axios
-    //   .get(API)
-    //   .then(result =>
-    //     this.setState({
-    //       todos: result.data
-    //     })
-    //   )
-    //   .catch(error =>
-    //     this.setState({
-    //       error
-    //     })
-    //   );
+    const data = res.data;
+    data.sort((a, b) => {
+      return b.id - a.id;
+    });
+    this.setState({ todos: data, isLoading: false });
   }
 
   addTodo = async text => {
@@ -52,32 +32,16 @@ export default class ContentTodolist extends React.Component {
       });
       const data = await res.data;
       this.setState({
-        todos: [...this.state.todos, data]
+        todos: [data, ...this.state.todos]
       });
-      // if (text) {
-      //   return axios
-      //     .post(API, {
-      //       text,
-      //       done: false,
-      //       isEdited: false
-      //     })
-      //     .then(response => {
-      //       this.setState({
-      //         todos: [...this.state.todos, response.data]
-      //       });
-      //     })
-      //     .catch(error => {
-      //       console.log(error);
-      //     });
-      // }
     }
   };
 
   markTodoDone = async (id, doneTodo) => {
+    this.setState({ loadIcon: true });
     const res = await axios.put(`${API}/${id}`, {
       done: !doneTodo
     });
-    // const data = await res.data;
     this.setState(state => ({
       todos: state.todos.map(todo => {
         if (todo.id === id) {
@@ -88,45 +52,15 @@ export default class ContentTodolist extends React.Component {
         } else {
           return todo;
         }
-      })
+      }),
+      loadIcon: false
     }));
-    // return  axios
-    //   .put(`${API}/${id}`, {
-    //     done: !doneTodo
-    //   })
-    //   .then(response => {
-    //     this.setState(state => ({
-    //       todos: state.todos.map(todo => {
-    //         if (todo.id === id) {
-    //           return {
-    //             ...todo,
-    //             done: !todo.done
-    //           };
-    //         } else {
-    //           return todo;
-    //         }
-    //       })
-    //     }));
-    //   })
-    //   .catch(error => {
-    //     console.log(error);
-    //   });
   };
 
   removeTodo = async id => {
     const res = await axios.delete(`${API}/${id}`);
-    // const data = await res.data;
     const filteredArray = this.state.todos.filter(item => item.id !== id);
     this.setState({ todos: filteredArray });
-    // return  axios
-    //   .delete(`${API}/${id}`)
-    //   .then(response => {
-    //     const filteredArray = this.state.todos.filter(item => item.id !== id);
-    //     this.setState({ todos: filteredArray });
-    //   })
-    //   .catch(error => {
-    //     console.log(error);
-    //   });
   };
 
   editTodo = id => {
@@ -161,28 +95,6 @@ export default class ContentTodolist extends React.Component {
       }
     });
     this.setState({ todos });
-
-    // return  axios
-    //   .put(`${API}/${id}`, {
-    //     text
-    //   })
-    //   .then(({ data }) => {
-    //     const todos = this.state.todos.map(todo => {
-    //       if (todo.id === data.id) {
-    //         return {
-    //           ...todo,
-    //           text: data.text,
-    //           isEdited: false
-    //         };
-    //       } else {
-    //         return todo;
-    //       }
-    //     });
-    //     this.setState({ todos });
-    //   })
-    //   .catch(error => {
-    //     console.log(error);
-    //   });
   };
 
   closeTodo = id => {
@@ -221,6 +133,7 @@ export default class ContentTodolist extends React.Component {
   render() {
     return (
       <div className="content">
+        {this.state.isLoading && <Loader />}
         <TodoForm addTodo={this.addTodo} />
         <TodoList
           todos={this.getFilterTodo()}
@@ -231,7 +144,7 @@ export default class ContentTodolist extends React.Component {
           filter={this.state.todoToShow}
           editTodoList={this.editTodoList}
           closeTodo={this.closeTodo}
-          isLoading={this.isLoading}
+          loadIcon={this.state.loadIcon}
         />
       </div>
     );
