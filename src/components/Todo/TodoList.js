@@ -1,6 +1,6 @@
 import React from "react";
 import TodoItem from "./TodoItem";
-
+import ErrorBoundary from "../ErrorBoundary";
 export default props => (
   <div className="list">
     <ul className="task-filters">
@@ -30,18 +30,20 @@ export default props => (
       </li>
     </ul>
     <div className="task-list">
-      {props.todos.map(t => (
-        <TodoItem
-          key={t.id}
-          {...t}
-          removeTodo={props.removeTodo}
-          markTodoDone={props.markTodoDone}
-          editTodo={props.editTodo}
-          editTodoList={props.editTodoList}
-          closeTodo={props.closeTodo}
-          loadIcon={props.loadIcon}
-        />
-      ))}
+      <ErrorBoundary>
+        {props.todos.map(t => (
+          <TodoItem
+            key={t.id}
+            todo={t}
+            removeTodo={props.removeTodo}
+            markTodoDone={props.markTodoDone}
+            editTodo={props.editTodo}
+            editTodoList={props.editTodoList}
+            closeTodo={props.closeTodo}
+            loadIcon={props.loadIcon}
+          />
+        ))}
+      </ErrorBoundary>
     </div>
   </div>
 );

@@ -3,9 +3,6 @@ body {
   color: #999;
   font-size: 16px;
 }
-body.busy-cursor {
-  cursor: progress;
-}
 #root {
   background-color: #222222;
   height: 1000px;

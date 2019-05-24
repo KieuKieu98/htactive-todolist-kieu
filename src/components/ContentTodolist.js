@@ -2,13 +2,14 @@ import React from "react";
 import TodoForm from "./Todo/TodoForm";
 import TodoList from "./Todo/TodoList";
 import Loader from "./Loader";
+// import ErrorBoundary from "./ErrorBoundary";
+
 // import shortid from "short-id";
 import axios from "axios";
 const API = "https://5ce4abbbc1ee360014725c91.mockapi.io/api/todos";
 export default class ContentTodolist extends React.Component {
   state = {
     todos: [],
-    isLoading: false,
     loadIcon: false,
     todoToShow: "all" // 'active', 'completed'
   };
@@ -30,7 +31,7 @@ export default class ContentTodolist extends React.Component {
         done: false,
         isEdited: false
       });
-      const data = await res.data;
+      const data = res.data;
       this.setState({
         todos: [data, ...this.state.todos]
       });
@@ -38,13 +39,12 @@ export default class ContentTodolist extends React.Component {
   };
 
   markTodoDone = async (id, doneTodo) => {
-    this.setState({ loadIcon: true });
     const res = await axios.put(`${API}/${id}`, {
       done: !doneTodo
     });
     this.setState(state => ({
       todos: state.todos.map(todo => {
-        if (todo.id === id) {
+        if (todo.id === res.data.id) {
           return {
             ...todo,
             done: !todo.done
@@ -59,7 +59,9 @@ export default class ContentTodolist extends React.Component {
 
   removeTodo = async id => {
     const res = await axios.delete(`${API}/${id}`);
-    const filteredArray = this.state.todos.filter(item => item.id !== id);
+    const filteredArray = this.state.todos.filter(
+      item => item.id !== res.data.id
+    );
     this.setState({ todos: filteredArray });
   };
 
@@ -82,7 +84,7 @@ export default class ContentTodolist extends React.Component {
     const res = await axios.put(`${API}/${id}`, {
       text
     });
-    const data = await res.data;
+    const data = res.data;
     const todos = this.state.todos.map(todo => {
       if (todo.id === data.id) {
         return {

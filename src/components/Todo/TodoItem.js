@@ -1,7 +1,28 @@
 import React from "react";
+import PropTypes from "prop-types";
+
 export default class TodoItem extends React.Component {
   state = {
     value: ""
+  };
+  static propTypes = {
+    todo: PropTypes.shape({
+      text: PropTypes.string.isRequired,
+      done: PropTypes.bool.isRequired,
+      isEdited: PropTypes.bool.isRequired,
+      isLoading: PropTypes.bool.isRequired
+    }).isRequired,
+    markTodoDone: PropTypes.func,
+    removeTodo: PropTypes.func,
+    closeTodo: PropTypes.func,
+    editTodo: PropTypes.func
+  };
+
+  static defaultProps = {
+    markTodoDone: () => {},
+    removeTodo: () => {},
+    closeTodo: () => {},
+    editTodo: () => {}
   };
 
   onChange = event =>
@@ -10,23 +31,21 @@ export default class TodoItem extends React.Component {
   onSubmit = event => {
     event.preventDefault();
     if (this.state.value) {
-      this.props.editTodoList(this.state.value, this.props.id);
+      this.props.editTodoList(this.state.value, this.props.todo.id);
     }
   };
 
   render() {
     const {
-      id,
-      text,
+      todo: { id, text, done, isEdited },
       markTodoDone,
       removeTodo,
-      done,
       editTodo,
-      isEdited,
       closeTodo
     } = this.props;
 
     if (isEdited === true) {
+      throw new Error();
       return (
         <div className="task-item">
           <div className="cell-lelf">
@@ -36,7 +55,7 @@ export default class TodoItem extends React.Component {
                   name="value"
                   type="text"
                   className="task-title"
-                  defaultValue={this.props.text}
+                  defaultValue={text}
                   onChange={this.onChange}
                 />
               </form>
@@ -94,7 +113,7 @@ export default class TodoItem extends React.Component {
             <button
               className="btn task-button btn-delete"
               type="button"
-              onClick={e =>
+              onClick={() =>
                 window.confirm("Are you sure you want to delete this item?") &&
                 removeTodo(id)}
             >
