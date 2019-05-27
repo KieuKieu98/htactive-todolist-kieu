@@ -45,6 +45,7 @@ export default class TodoItem extends React.Component {
     } = this.props;
 
     if (isEdited === true) {
+      closeTodo(id);
       throw new Error();
       return (
         <div className="task-item">

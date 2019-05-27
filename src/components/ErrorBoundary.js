@@ -5,13 +5,13 @@ export default class ErrorBoundary extends React.Component {
   state = { error: null, errorInfo: null, open: false };
   componentDidCatch(error, errorInfo) {
     this.setState({
-      error: error,
-      errorInfo: errorInfo,
+      error,
+      errorInfo,
       open: true
     });
   }
   onCloseModal = () => {
-    this.setState({ open: false });
+    this.setState({ open: false, errorInfo: null });
   };
   render() {
     const { open } = this.state;

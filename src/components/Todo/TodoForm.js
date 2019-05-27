@@ -4,7 +4,7 @@ export default class TodoForm extends React.Component {
   state = {
     value: ""
   };
-
+  textInput = React.createRef();
   onChange = event =>
     this.setState({ [event.target.name]: event.target.value });
 
@@ -15,6 +15,11 @@ export default class TodoForm extends React.Component {
       this.setState({ value: "" });
     }
   };
+
+  componentDidMount() {
+    this.textInput.current.focus();
+  }
+
   render() {
     return (
       <div className="input">
@@ -22,6 +27,7 @@ export default class TodoForm extends React.Component {
           <input
             name="value"
             type="text"
+            ref={this.textInput}
             className="task-form"
             placeholder="What needs to be done?"
             value={this.state.value}
