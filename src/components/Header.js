@@ -16,7 +16,7 @@ class Header extends React.Component {
       return (
         <div className="header">
           <HeaderTitle />
-          <Logo changeColor={this.props.changeColor} />
+          <Logo  />
         </div>
       );
     }

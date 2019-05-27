@@ -5,7 +5,7 @@ import "./Login.css";
 
 export default props => (
   <div className="container">
-    <Header onLogin={props.onLogin} changeColor={props.changeColor} />
-    <Content onLogin={props.onLogin} colorBtn={props.colorBtn} />
+    <Header onLogin={props.onLogin}  />
+    <Content onLogin={props.onLogin} />
   </div>
 );
