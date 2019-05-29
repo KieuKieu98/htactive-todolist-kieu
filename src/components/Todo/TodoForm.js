@@ -1,6 +1,8 @@
 import React from "react";
 
-export default class TodoForm extends React.Component {
+import withTodo from "../hoc/withTodo";
+
+class TodoForm extends React.Component {
   state = {
     value: ""
   };
@@ -38,3 +40,5 @@ export default class TodoForm extends React.Component {
     );
   }
 }
+
+export default withTodo(TodoForm);

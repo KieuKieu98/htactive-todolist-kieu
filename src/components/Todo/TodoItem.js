@@ -1,37 +1,40 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React, { useContext } from "react";
+// import PropTypes from "prop-types";
+import withTodo from "../hoc/withTodo";
 
-export default class TodoItem extends React.Component {
+class TodoItem extends React.Component {
   state = {
     value: ""
   };
-  static propTypes = {
-    todo: PropTypes.shape({
-      text: PropTypes.string.isRequired,
-      done: PropTypes.bool.isRequired,
-      isEdited: PropTypes.bool.isRequired,
-      isLoading: PropTypes.bool.isRequired
-    }).isRequired,
-    markTodoDone: PropTypes.func,
-    removeTodo: PropTypes.func,
-    closeTodo: PropTypes.func,
-    editTodo: PropTypes.func
-  };
 
-  static defaultProps = {
-    markTodoDone: () => {},
-    removeTodo: () => {},
-    closeTodo: () => {},
-    editTodo: () => {}
-  };
+  // static propTypes = {
+  //   todo: PropTypes.shape({
+  //     text: PropTypes.string.isRequired,
+  //     done: PropTypes.bool.isRequired,
+  //     isEdited: PropTypes.bool.isRequired,
+  //     isLoading: PropTypes.bool.isRequired
+  //   }).isRequired,
+  //   markTodoDone: PropTypes.func,
+  //   removeTodo: PropTypes.func,
+  //   closeTodo: PropTypes.func,
+  //   editTodo: PropTypes.func
+  // };
+
+  // static defaultProps = {
+  //   markTodoDone: () => {},
+  //   removeTodo: () => {},
+  //   closeTodo: () => {},
+  //   editTodo: () => {}
+  // };
 
   onChange = event =>
     this.setState({ [event.target.name]: event.target.value });
 
   onSubmit = event => {
     event.preventDefault();
-    if (this.state.value) {
-      this.props.editTodoList(this.state.value, this.props.todo.id);
+    const { value } = this.state;
+    if (value) {
+      this.props.editTodoList(value, this.props.todo.id);
     }
   };
 
@@ -45,8 +48,6 @@ export default class TodoItem extends React.Component {
     } = this.props;
 
     if (isEdited === true) {
-      closeTodo(id);
-      throw new Error();
       return (
         <div className="task-item">
           <div className="cell-lelf">
@@ -126,3 +127,5 @@ export default class TodoItem extends React.Component {
     }
   }
 }
+
+export default withTodo(TodoItem);

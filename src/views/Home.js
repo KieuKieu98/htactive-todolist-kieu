@@ -2,13 +2,10 @@ import React from "react";
 import Header from "../components/Header";
 import ContentTodolist from "../components/ContentTodolist";
 import "./Login.css";
-export default props => (
+
+export default () => (
   <div className="container">
-    <Header
-      onLogin={props.onLogin}
-      page={props.page}
-      changeColor={props.changeColor}
-    />
+    <Header />
     <ContentTodolist />
   </div>
 );
