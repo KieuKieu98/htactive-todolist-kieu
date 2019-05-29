@@ -1,44 +1,40 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import withTodo from "../hoc/withTodo";
 
-class TodoForm extends React.Component {
-  state = {
-    value: ""
-  };
-  textInput = React.createRef();
-  onChange = event =>
-    this.setState({ [event.target.name]: event.target.value });
+const TodoForm = props => {
+  const [value, setValue] = useState("");
+  const textInput = React.createRef();
+  // useEffect should enter an empty array to not run during process
+  useEffect(() => {
+    return textInput.current.focus();
+  }, []);
 
-  onSubmit = event => {
+  const onChange = event => setValue(event.target.value);
+
+  const onSubmit = event => {
     event.preventDefault();
-    if (this.state.value) {
-      this.props.addTodo(this.state.value);
-      this.setState({ value: "" });
+    if (value) {
+      props.addTodo(value);
+      setValue("");
     }
   };
 
-  componentDidMount() {
-    this.textInput.current.focus();
-  }
-
-  render() {
-    return (
-      <div className="input">
-        <form onSubmit={this.onSubmit}>
-          <input
-            name="value"
-            type="text"
-            ref={this.textInput}
-            className="task-form"
-            placeholder="What needs to be done?"
-            value={this.state.value}
-            onChange={this.onChange}
-          />
-        </form>
-      </div>
-    );
-  }
-}
+  return (
+    <div className="input">
+      <form onSubmit={onSubmit}>
+        <input
+          name="value"
+          type="text"
+          ref={textInput}
+          className="task-form"
+          placeholder="What needs to be done?"
+          value={value}
+          onChange={onChange}
+        />
+      </form>
+    </div>
+  );
+};
 
 export default withTodo(TodoForm);

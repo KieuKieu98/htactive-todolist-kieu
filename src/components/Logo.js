@@ -1,14 +1,14 @@
-import React, { useContext } from "react";
-import ColorContext from "./context/ColorContext";
+import React from "react";
+import withApp from "./hoc/withApp";
 
-export default () => {
-  const { changeColor } = useContext(ColorContext);
+const Logo = props => {
   return (
     <div className="header-action">
       <i className="fab fa-github icon-git" />
-      <button className="changeColor" onClick={changeColor}>
+      <button className="changeColor" onClick={props.changeColor}>
         <i className="fas fa-adjust icon_change" />
       </button>
     </div>
   );
 };
+export default withApp(Logo);

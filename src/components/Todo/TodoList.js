@@ -1,6 +1,6 @@
-import React, { useContext } from "react";
+import React from "react";
 import TodoItem from "./TodoItem";
-import ErrorBoundary from "../ErrorBoundary";
+// import ErrorBoundary from "../ErrorBoundary";
 import withTodo from "../hoc/withTodo";
 
 const TodoList = props => {

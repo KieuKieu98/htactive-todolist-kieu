@@ -1,12 +1,11 @@
-import React, { useContext } from "react";
+import React from "react";
 import Logo from "./Logo";
 import SignOut from "./SignOut";
 import HeaderTitle from "./HeaderTitle";
-import ColorContext from "./context/ColorContext";
+import withApp from "./hoc/withApp";
 
-export default () => {
-  const { page } = useContext(ColorContext);
-  if (page === "home") {
+const Header = props => {
+  if (props.page === "home") {
     return (
       <div className="header">
         <HeaderTitle />
@@ -22,3 +21,4 @@ export default () => {
     );
   }
 };
+export default withApp(Header);

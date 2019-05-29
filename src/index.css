@@ -71,6 +71,9 @@ body {
 .task-filters li {
   display: inline-flex;
 }
+.task-filters li:hover {
+  cursor: pointer;
+}
 
 .task-filters a {
   color: #999;

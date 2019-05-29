@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 import TodoContext from "./TodoContext";
@@ -6,19 +6,17 @@ import Loader from "../Loader";
 
 const API = "https://5ce4abbbc1ee360014725c91.mockapi.io/api/todos";
 
-export default class TodoProvider extends React.Component {
-  state = {
-    todos: [],
-    todoToShow: "all",
-    isLoading: false
-  };
+export default props => {
+  const [todos, setTodo] = useState([]);
+  const [todoToShow, setTodoShow] = useState("all");
+  const [isLoading, setLoading] = useState(true);
 
-  markTodoDone = async (id, doneTodo) => {
+  const markTodoDone = async (id, doneTodo) => {
     const res = await axios.put(`${API}/${id}`, {
       done: !doneTodo
     });
-    this.setState(state => ({
-      todos: state.todos.map(todo => {
+    setTodo(
+      todos.map(todo => {
         if (todo.id === res.data.id) {
           return {
             ...todo,
@@ -28,20 +26,18 @@ export default class TodoProvider extends React.Component {
           return todo;
         }
       })
-    }));
-  };
-
-  removeTodo = async id => {
-    const res = await axios.delete(`${API}/${id}`);
-    const filteredArray = this.state.todos.filter(
-      item => item.id !== res.data.id
     );
-    this.setState({ todos: filteredArray });
   };
 
-  editTodo = id => {
-    this.setState(state => ({
-      todos: this.state.todos.map(todo => {
+  const removeTodo = async id => {
+    const res = await axios.delete(`${API}/${id}`);
+    const filteredArray = todos.filter(item => item.id !== res.data.id);
+    setTodo(filteredArray);
+  };
+
+  const editTodo = id => {
+    setTodo(
+      todos.map(todo => {
         if (todo.id === id) {
           return {
             ...todo,
@@ -51,15 +47,15 @@ export default class TodoProvider extends React.Component {
           return todo;
         }
       })
-    }));
+    );
   };
 
-  editTodoList = async (text, id) => {
+  const editTodoList = async (text, id) => {
     const res = await axios.put(`${API}/${id}`, {
       text
     });
     const data = res.data;
-    const todos = this.state.todos.map(todo => {
+    const todo = todos.map(todo => {
       if (todo.id === data.id) {
         return {
           ...todo,
@@ -70,12 +66,12 @@ export default class TodoProvider extends React.Component {
         return todo;
       }
     });
-    this.setState({ todos });
+    setTodo(todo);
   };
 
-  closeTodo = id => {
-    this.setState(state => ({
-      todos: this.state.todos.map(todo => {
+  const closeTodo = id => {
+    setTodo(
+      todos.map(todo => {
         if (todo.id === id) {
           return {
             ...todo,
@@ -85,20 +81,24 @@ export default class TodoProvider extends React.Component {
           return todo;
         }
       })
-    }));
+    );
   };
 
-  async componentDidMount() {
-    this.setState({ isLoading: true });
-    const res = await axios.get(API);
-    const data = res.data;
-    data.sort((a, b) => {
-      return b.id - a.id;
-    });
-    this.setState({ todos: data, isLoading: false });
-  }
+  useEffect(() => {
+    async function fetchData() {
+      setLoading(true);
+      const res = await axios.get(API);
+      const data = res.data;
+      data.sort((a, b) => {
+        return b.id - a.id;
+      });
+      setTodo(data);
+      setLoading(false);
+    }
+    fetchData();
+  }, []);
 
-  addTodo = async text => {
+  const addTodo = async text => {
     if (text) {
       const res = await axios.post(API, {
         text,
@@ -106,20 +106,15 @@ export default class TodoProvider extends React.Component {
         isEdited: false
       });
       const data = res.data;
-      this.setState({
-        todos: [data, ...this.state.todos]
-      });
+      setTodo([data, ...todos]);
     }
   };
 
-  updateTodoToShow = s => {
-    this.setState({
-      todoToShow: s
-    });
+  const updateTodoToShow = s => {
+    setTodoShow(s);
   };
 
-  getFilterTodo = () => {
-    const { todos, todoToShow } = this.state;
+  const getFilterTodo = () => {
     switch (todoToShow) {
       case "active":
         return todos.filter(t => !t.done);
@@ -130,23 +125,21 @@ export default class TodoProvider extends React.Component {
     }
   };
 
-  render() {
-    return (
-      <TodoContext.Provider
-        value={{
-          todos: this.getFilterTodo(),
-          filter: this.state.todoToShow,
-          markTodoDone: this.markTodoDone,
-          removeTodo: this.removeTodo,
-          editTodo: this.editTodo,
-          editTodoList: this.editTodoList,
-          closeTodo: this.closeTodo,
-          addTodo: this.addTodo,
-          updateTodoToShow: this.updateTodoToShow
-        }}
-      >
-        {this.state.isLoading ? <Loader /> : this.props.children}
-      </TodoContext.Provider>
-    );
-  }
-}
+  return (
+    <TodoContext.Provider
+      value={{
+        todos: getFilterTodo(),
+        filter: todoToShow,
+        markTodoDone: markTodoDone,
+        removeTodo: removeTodo,
+        editTodo: editTodo,
+        editTodoList: editTodoList,
+        closeTodo: closeTodo,
+        addTodo: addTodo,
+        updateTodoToShow: updateTodoToShow
+      }}
+    >
+      {isLoading ? <Loader /> : props.children}
+    </TodoContext.Provider>
+  );
+};

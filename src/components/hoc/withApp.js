@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 
-import TodoContext from "../context/TodoContext";
+import ColorContext from "../context/ColorContext";
 
 export default Component => props => {
-  const context = useContext(TodoContext);
+  const context = useContext(ColorContext);
 
   return <Component {...context} {...props} />;
 };

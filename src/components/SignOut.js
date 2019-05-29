@@ -1,14 +1,14 @@
-import React, { useContext } from "react";
-import ColorContext from "./context/ColorContext";
+import React from "react";
+import withApp from "./hoc/withApp";
 
-export default () => {
-  const { changePage } = useContext(ColorContext);
+const SignOut = props => {
   return (
     <div className="header-action">
-      <a className="sign-out" onClick={() => changePage("login")}>
+      <a className="sign-out" onClick={() => props.changePage("login")}>
         Sign out
       </a>
       <i className="fab fa-github icon-git" />
     </div>
   );
 };
+export default withApp(SignOut);
