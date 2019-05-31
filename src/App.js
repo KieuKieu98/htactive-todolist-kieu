@@ -3,11 +3,8 @@ import "./App.css";
 import Login from "./views/Login";
 import Home from "./views/Home";
 
-import TodoProvider from "./components/context/TodoProvider";
 import withApp from "./components/hoc/withApp";
 
-const App = props => (
-  <TodoProvider>{props.page === "home" ? <Home /> : <Login />}</TodoProvider>
-);
+const App = props => (props.page === "home" ? <Home /> : <Login />);
 
 export default withApp(App);

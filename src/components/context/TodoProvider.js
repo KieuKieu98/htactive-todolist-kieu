@@ -2,14 +2,13 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 import TodoContext from "./TodoContext";
-import Loader from "../Loader";
 
 const API = "https://5ce4abbbc1ee360014725c91.mockapi.io/api/todos";
 
 export default props => {
   const [todos, setTodo] = useState([]);
   const [todoToShow, setTodoShow] = useState("all");
-  const [isLoading, setLoading] = useState(true);
+  const [isLoading, setLoading] = useState(false);
 
   const markTodoDone = async (id, doneTodo) => {
     const res = await axios.put(`${API}/${id}`, {
@@ -136,10 +135,11 @@ export default props => {
         editTodoList: editTodoList,
         closeTodo: closeTodo,
         addTodo: addTodo,
-        updateTodoToShow: updateTodoToShow
+        updateTodoToShow: updateTodoToShow,
+        isLoading: isLoading
       }}
     >
-      {isLoading ? <Loader /> : props.children}
+      {props.children}
     </TodoContext.Provider>
   );
 };
