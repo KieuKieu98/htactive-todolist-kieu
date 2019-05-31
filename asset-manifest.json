@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/KieuKieu98/htactive-todolist-kieu/static/css/main.8426406d.chunk.css",
-    "main.js": "/KieuKieu98/htactive-todolist-kieu/static/js/main.b90c1d53.chunk.js",
-    "main.js.map": "/KieuKieu98/htactive-todolist-kieu/static/js/main.b90c1d53.chunk.js.map",
-    "runtime~main.js": "/KieuKieu98/htactive-todolist-kieu/static/js/runtime~main.f48b1e3d.js",
-    "runtime~main.js.map": "/KieuKieu98/htactive-todolist-kieu/static/js/runtime~main.f48b1e3d.js.map",
-    "static/js/2.2262bf60.chunk.js": "/KieuKieu98/htactive-todolist-kieu/static/js/2.2262bf60.chunk.js",
-    "static/js/2.2262bf60.chunk.js.map": "/KieuKieu98/htactive-todolist-kieu/static/js/2.2262bf60.chunk.js.map",
-    "index.html": "/KieuKieu98/htactive-todolist-kieu/index.html",
-    "precache-manifest.7fca5b0f73cbab428ba3e4d1a081b1c3.js": "/KieuKieu98/htactive-todolist-kieu/precache-manifest.7fca5b0f73cbab428ba3e4d1a081b1c3.js",
-    "service-worker.js": "/KieuKieu98/htactive-todolist-kieu/service-worker.js",
-    "static/css/main.8426406d.chunk.css.map": "/KieuKieu98/htactive-todolist-kieu/static/css/main.8426406d.chunk.css.map"
+    "main.css": "/htactive-todolist-kieu/static/css/main.8426406d.chunk.css",
+    "main.js": "/htactive-todolist-kieu/static/js/main.e00b6239.chunk.js",
+    "main.js.map": "/htactive-todolist-kieu/static/js/main.e00b6239.chunk.js.map",
+    "runtime~main.js": "/htactive-todolist-kieu/static/js/runtime~main.72f57564.js",
+    "runtime~main.js.map": "/htactive-todolist-kieu/static/js/runtime~main.72f57564.js.map",
+    "static/js/2.2262bf60.chunk.js": "/htactive-todolist-kieu/static/js/2.2262bf60.chunk.js",
+    "static/js/2.2262bf60.chunk.js.map": "/htactive-todolist-kieu/static/js/2.2262bf60.chunk.js.map",
+    "index.html": "/htactive-todolist-kieu/index.html",
+    "precache-manifest.94825e926e1b6140d09702e55ed03a98.js": "/htactive-todolist-kieu/precache-manifest.94825e926e1b6140d09702e55ed03a98.js",
+    "service-worker.js": "/htactive-todolist-kieu/service-worker.js",
+    "static/css/main.8426406d.chunk.css.map": "/htactive-todolist-kieu/static/css/main.8426406d.chunk.css.map"
   }
 }
