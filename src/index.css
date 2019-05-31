@@ -177,6 +177,8 @@ body {
   animation: rotate 1s infinite;
   height: 50px;
   width: 50px;
+  margin: 0 auto;
+  margin-top: 300px;
 }
 
 .loader:before,

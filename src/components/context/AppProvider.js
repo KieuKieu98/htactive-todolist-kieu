@@ -8,11 +8,6 @@ export default props => {
   const [colorBlack, setColor] = useState(true);
 
   const changeColor = () => {
-    // const x = Math.floor(Math.random() * 256);
-    // const y = Math.floor(Math.random() * 256);
-    // const z = Math.floor(Math.random() * 256);
-    // const bgcolor = "rgb(" + x + "," + y + "," + z + ")";
-    // document.body.style.background = bgcolor;
     setColor(!colorBlack);
     const bgColor = colorBlack ? "black" : "white";
     setcolorBtn(bgColor);
