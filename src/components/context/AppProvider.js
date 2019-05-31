@@ -5,12 +5,17 @@ import ColorContext from "./ColorContext";
 export default props => {
   const [page, setValue] = useState("");
   const [colorBtn, setcolorBtn] = useState("");
-  const [colorBlack, setColor] = useState(true);
+  // const [colorBlack, setColor] = useState(true);
 
   const changeColor = () => {
-    setColor(!colorBlack);
-    const bgColor = colorBlack ? "black" : "white";
-    setcolorBtn(bgColor);
+    const x = Math.floor(Math.random() * 256);
+    const y = Math.floor(Math.random() * 256);
+    const z = Math.floor(Math.random() * 256);
+    const bgcolor = "rgb(" + x + "," + y + "," + z + ")";
+    // setColor(!colorBlack);
+    // const bgColor = colorBlack ? "black" : "white";
+    // setcolorBtn(bgColor);
+    setcolorBtn(bgcolor);
   };
   const changePage = page => setValue(page);
   return (
