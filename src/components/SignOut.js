@@ -4,10 +4,15 @@ import withApp from "./hoc/withApp";
 const SignOut = props => {
   return (
     <div className="header-action">
-      <a className="sign-out" onClick={() => props.changePage("login")}>
+      <a className="sign-out" onClick={() => props.changePage("")}>
         Sign out
       </a>
-      <i className="fab fa-github icon-git" />
+      <a
+        className="git"
+        href="https://github.com/KieuKieu98/htactive-todolist-kieu/"
+      >
+        <i className="fab fa-github icon-git" />
+      </a>
     </div>
   );
 };

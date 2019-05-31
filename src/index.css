@@ -212,6 +212,9 @@ body {
   margin-top: 5px;
   font-size: 18px;
 }
+.git {
+  color: gray;
+}
 @keyframes rotate {
   0% {
     -webkit-transform: rotate(0deg) scale(0.8);
