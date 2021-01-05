@@ -5,7 +5,7 @@
   "homepage": "https://kieukieu98.github.io/htactive-todolist-kieu/",
   "dependencies": {
     "@reach/dialog": "^0.2.8",
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "gh-pages": "^2.0.1",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
